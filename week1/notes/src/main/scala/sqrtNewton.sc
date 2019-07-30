@@ -1,16 +1,18 @@
 // https://www.coursera.org/learn/progfun1/lecture/FQDE1/lecture-1-5-example-square-roots-with-newtons-method
 
-def improve(guess: Double, x: Double): Double = (guess + x / guess) / 2
+def sqrt(x: Double): Double = {
+  def improve(guess: Double): Double = (guess + x / guess) / 2
 
-def abs (x: Double): Double = if (x < 0) -1 * x else x
+  def abs(x: Double): Double = if (x < 0) -1 * x else x
 
-def isGoodEnough(guess: Double, x: Double): Boolean = abs(guess * guess - x) < 0.000000000000001*x
+  def isGoodEnough(guess: Double): Boolean = abs(guess * guess - x) < 0.000000000000001 * x
 
-def sqrtIter(guess: Double, x: Double): Double =
-  if (isGoodEnough(guess, x)) guess
-  else sqrtIter(improve(guess, x), x)
+  def sqrtIter(guess: Double): Double =
+    if (isGoodEnough(guess)) guess
+    else sqrtIter(improve(guess))
 
-def sqrt(x: Double): Double = sqrtIter(guess = 1, x)
+  sqrtIter(1)
+}
 
 sqrt(2)
 sqrt(4)
