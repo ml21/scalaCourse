@@ -1,5 +1,7 @@
 package program
 
+import scala.annotation.tailrec
+
 object Main extends App {
   println("notes app")
   loop
