@@ -25,7 +25,16 @@ object Main {
   /**
    * Exercise 2
    */
-    def balance(chars: List[Char]): Boolean = ???
+    def balance(chars: List[Char]): Boolean = {
+      def balanceInternal(chars: List[Char], cb: Int): Boolean =
+        if (cb < 0) false
+        else if (chars.isEmpty) !(cb > 0)
+        else if (chars.head == ')') balanceInternal(chars.tail, cb - 1)
+        else if (chars.head == '(') balanceInternal(chars.tail, cb + 1)
+        else balanceInternal(chars.tail, cb)
+
+      balanceInternal(chars, 0)
+    }
   
   /**
    * Exercise 3
