@@ -56,9 +56,14 @@ sum3(cube)(1, 5)
 Ее всегда можно каррировать так
   def f = (args1 => (args2 => ... (argsN => E)))
 */// Например:
-def s = (x: Int) => (y: Int) => x + y
+def s = (x: Int) => (y: Int) => x + yx
 def plusOne = s(1)
 plusOne(4)
+
+// sum2\sum3 имеют 2 листа параметров. попробую с тремя что нибудь
+def somef(f: Int => Int): Int => Int => Int =
+  (a: Int) => (b: Int) => a + f(b)
+somef(x => x * x)(1)(2)
 
 
 def product0(f: Int => Int)(a: Int, b: Int): Int =
