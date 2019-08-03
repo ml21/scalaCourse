@@ -1,9 +1,18 @@
 // Lecture 2.5 Functions and data
 // https://www.coursera.org/learn/progfun1/lecture/5mmJP/lecture-2-5-functions-and-data
 
-class Rational(x: Int, y: Int) {
-  def numerator = x
-  def denominator = y
+def gcd(a: Int, b: Int): Int =
+  if (b == 0) a
+  else gcd(b, a % b)
+
+class Rational(numer: Int, denum: Int) {
+  require(denum > 0, "denumerator must be positive")
+  private def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+
+  val numerator = numer
+  val denominator = denum
+
+  def this(numer: Int) = this(numer, 1)
 
   def add(that: Rational) = new Rational(
     that.denominator * this.numerator + this.denominator * that.numerator,
@@ -15,19 +24,27 @@ class Rational(x: Int, y: Int) {
     this.denominator * that.denominator
   )
 
-  def mul(that: Int) = new Rational(
-    this.numerator * that,
-    this.denominator
-  )
+  def mul(i: Int) = new Rational(
+    this.numerator * i,
+    this.denominator)
 
-  def sub(that: Rational) = this add that.neg
 
-  def div(that: Rational) = this mul new Rational(that.denominator, that.numerator)
+  def sub(that: Rational) = (this add that.neg)
 
-  def neg = this mul -1
+  def div(that: Rational) = (this mul new Rational(that.denominator, that.numerator))
 
-  override def toString: String = this.numerator + "/" + this.denominator
+  def neg = (this mul -1)
 
+  def lessZero = this.numerator * this.denominator < 0
+
+  def less(that: Rational): Boolean = that.denominator * this.numerator < this.denominator * that.numerator
+
+  def max(that: Rational): Rational = if (this less that) that else this
+
+  override def toString: String = {
+    val divisor = Math.abs(gcd(numer, denum))
+    this.numerator / divisor + "/" + this.denominator / divisor
+  }
 }
 
 def addRational(r: Rational, s: Rational): Rational = new Rational(
@@ -44,6 +61,7 @@ object rationals {
 
 val r = new Rational(1,2)
 val s = new Rational(2, 3)
+val r0 = new Rational(1,2)
 r add s
 r mul s
 r mul 2
@@ -54,6 +72,23 @@ r div s
 val x = new Rational(1, 3)
 val y = new Rational(5, 7)
 val z = new Rational(3, 2)
-x sub y sub z
+val r1 = x sub y sub z
+val r2 = y add y
 
+r less s
+r less s.neg
+
+r max s
+r max r0
+
+val strange = new Rational(1, 0)
+strange add strange
+
+r max s add s
+
+val i = new Rational(2)
+val big = new Rational(Int.MaxValue, Int.MaxValue/2)
+val biga = new Rational(Int.MaxValue, Int.MaxValue/3)
+
+big add biga
 
