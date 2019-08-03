@@ -1,5 +1,10 @@
-ass
+*.class
 *.log
+*~
+
+.bloop
+.dotty-ide-artifact
+.dotty-ide.json
 
 # sbt specific
 .cache/
@@ -11,9 +16,20 @@ lib_managed/
 src_managed/
 project/boot/
 project/plugins/project/
+project/local-plugins.sbt
+.history
 
 # Scala-IDE specific
 .scala_dependencies
+.cache
+.classpath
 .worksheet
 .idea
 .metals
+.project
+.settingsa
+
+# idea
+.idea
+.idea_modules
+/.worksheet/

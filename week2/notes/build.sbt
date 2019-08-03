@@ -2,4 +2,4 @@ name := "notes"
 
 version := "0.1"
 
-scalaVersion := "2.13.0"
+scalaVersion := "0.17.0-RC1"
