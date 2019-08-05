@@ -81,6 +81,9 @@ class FunSetSuite extends FunSuite {
 
     val u123 = union(union(s1, s2), s3)
     val u234 = union(union(s2, s3), s4)
+
+    val evens = union(s2, s4)
+    val odds = union(s1, s3)
   }
 
   /**
@@ -143,5 +146,24 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("forall checks parity") {
+    new TestSets {
+      assert(forall(evens, x => x % 2 == 0) == true, "return true for even numbers")
+      assert(forall(odds, x => x % 2 == 0) == false, "return false for odd numbers")
+    }
+  }
 
+  test("exists checks parity") {
+    new TestSets {
+      assert(exists(u234, x => x % 2 ==0) == true, "returns true for even and odd numbers mix")
+      assert(exists(odds, x => x % 2 ==0) == false, "returns false for only odd numbers")
+    }
+  }
+
+  test("map converts odds into events") {
+    new TestSets {
+      val mapped = map(odds, x => x + 1)
+      assert(forall(mapped, x => x % 2 == 0) == true, "returns true if odds successfully converted into evens")
+    }
+  }
 }
