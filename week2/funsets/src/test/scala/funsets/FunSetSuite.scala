@@ -146,10 +146,24 @@ class FunSetSuite extends FunSuite {
     }
   }
 
-  test("forall assert even (not odds) elements") {
+  test("forall checks parity") {
     new TestSets {
-      assert(forall(evens, x => x % 2 == 0) === true, "assert evens")
-      assert(forall(odds, x => x % 2 == 0) === false, "not assert odds")
+      assert(forall(evens, x => x % 2 == 0) == true, "return true for even numbers")
+      assert(forall(odds, x => x % 2 == 0) == false, "return false for odd numbers")
+    }
+  }
+
+  test("exists checks parity") {
+    new TestSets {
+      assert(exists(u234, x => x % 2 ==0) == true, "returns true for even and odd numbers mix")
+      assert(exists(odds, x => x % 2 ==0) == false, "returns false for only odd numbers")
+    }
+  }
+
+  test("map converts odds into events") {
+    new TestSets {
+      val mapped = map(odds, x => x + 1)
+      assert(forall(mapped, x => x % 2 == 0) == true, "returns true if odds successfully converted into evens")
     }
   }
 }

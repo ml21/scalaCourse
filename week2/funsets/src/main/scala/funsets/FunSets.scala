@@ -22,7 +22,7 @@ FunSets {
    */
   def singletonSet(elem: Int): Set = x => x == elem
 
-  def trinitySet(a: Int, b: Int, c: Int): Set = x => x == a || x == b || x == c
+  def emptySet(): Set = _ => false
 
   /**
    * Returns the union of the two given sets,
@@ -58,23 +58,37 @@ FunSets {
    */
     def forall(s: Set, p: Int => Boolean): Boolean = {
     def iter(a: Int): Boolean = {
-      if (???) ???
-      else if (???) ???
-      else iter(???)
+      if (a > bound) true
+      else if (!contains(s, a)) iter(a + 1)
+      else p(a) && iter(a + 1)
     }
-    iter(???)
+    iter(-1 * bound)
   }
   
   /**
    * Returns whether there exists a bounded integer within `s`
    * that satisfies `p`.
    */
-    def exists(s: Set, p: Int => Boolean): Boolean = ???
+    def exists(s: Set, p: Int => Boolean): Boolean = {
+      def iter(a: Int): Boolean = {
+        if (a > bound) false
+        else if (!contains(s, a)) iter(a + 1)
+        else p(a) || iter(a + 1)
+      }
+      iter(-1 * bound)
+    }
   
   /**
    * Returns a set transformed by applying `f` to each element of `s`.
    */
-    def map(s: Set, f: Int => Int): Set = ???
+    def map(s: Set, f: Int => Int): Set = {
+      def iter(a: Int): Set = {
+        if (a > bound) emptySet()
+        else if (!contains(s, a)) iter(a + 1)
+        else union(singletonSet(f(a)), iter(a + 1))
+      }
+      iter(0)
+    }
   
   /**
    * Displays the contents of a set
