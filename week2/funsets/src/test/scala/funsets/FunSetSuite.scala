@@ -81,6 +81,9 @@ class FunSetSuite extends FunSuite {
 
     val u123 = union(union(s1, s2), s3)
     val u234 = union(union(s2, s3), s4)
+
+    val evens = union(s2, s4)
+    val odds = union(s1, s3)
   }
 
   /**
@@ -143,5 +146,10 @@ class FunSetSuite extends FunSuite {
     }
   }
 
-
+  test("forall assert even (not odds) elements") {
+    new TestSets {
+      assert(forall(evens, x => x % 2 == 0) === true, "assert evens")
+      assert(forall(odds, x => x % 2 == 0) === false, "not assert odds")
+    }
+  }
 }
