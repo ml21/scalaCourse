@@ -1,20 +1,9 @@
 package notes
 
-object notes extends App {
-  val tolerance = 0.0001
-  def isCloseEnough(x: Double, y: Double) =
-    Math.abs((x - y) / x) / x < tolerance
-  def fixedPoint(f: Double => Double)(firstGuess: Double) = {
-    def iterate(guess: Double): Double = {
-      println("guess = " + guess)
-      val next = f(guess)
-      println("next" + next)
-      if (isCloseEnough(guess, next)) next
-      else iterate(next)
-    }
-    iterate(firstGuess)
-  }
-
-  def sqrt(x: Double) : Double = fixedPoint(y => (y + x / y) / 2)(1)
-  println("sqrt =" + sqrt(2))
+object notes {
+    def argsToString(args: Array[String]): String = 
+    if (args.isEmpty) ""
+    else args.head + " " + argsToString(args.tail)
+    
+    def main(args: Array[String]) = println("Hello world " + argsToString(args))
 }
