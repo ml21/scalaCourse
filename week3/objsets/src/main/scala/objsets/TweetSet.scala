@@ -78,7 +78,7 @@ abstract class TweetSet {
    * Question: Should we implment this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-    def descendingByRetweet: TweetList = ???
+    def descendingByRetweet: TweetList
   
   /**
    * The following methods are already implemented
@@ -116,7 +116,8 @@ class Empty extends TweetSet {
   override def union(that: TweetSet): TweetSet = that
 
   override def mostRetweeted: Tweet = new Tweet("", "", 0)
-  
+
+  override def descendingByRetweet: TweetList = Nil
   /**
    * The following methods are already implemented
    */
@@ -153,6 +154,14 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
     val m = mostRetweeted(left.mostRetweeted, right.mostRetweeted)
     if (m.retweets > this.elem.retweets) m
     else elem
+  }
+
+  override def descendingByRetweet: TweetList = {
+    val m = this.mostRetweeted
+    val l = this.remove(m).descendingByRetweet
+
+    if (l.isEmpty) new Cons(m, Nil)
+    else new Cons(m, l)
   }
 
   /**
