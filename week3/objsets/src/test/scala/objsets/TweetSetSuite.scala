@@ -9,17 +9,14 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class TweetSetSuite extends FunSuite {
   trait TestSets {
-    val a = new Tweet("a", "a body", 20)
-    val b = new Tweet("b", "b body", 20)
+    val set1 = new Empty
+    val set2 = set1.incl(new Tweet("a", "a body", 20))
+    val set3 = set2.incl(new Tweet("b", "b body", 20))
     val c = new Tweet("c", "c body", 7)
     val d = new Tweet("d", "d body", 9)
-    val set1 = new Empty
-    val set2 = set1.incl(a)
-    val set3 = set2.incl(b)
     val set4c = set3.incl(c)
     val set4d = set3.incl(d)
     val set5 = set4c.incl(d)
-    val set6 = set2.incl(c)
   }
 
   def asSet(tweets: TweetSet): Set[Tweet] = {
@@ -74,10 +71,4 @@ class TweetSetSuite extends FunSuite {
     }
   }
 
-  test("a is most retweeted in set6") {
-    new TestSets {
-      assert(set6.mostRetweeted eq a)
-    }
   }
-
-}
