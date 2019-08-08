@@ -1,5 +1,5 @@
 abstract class IntSet {
-    def contains(i: Int): Boolean 
+    def contains(i: Int): Boolean
     def include(i: Int): IntSet
     def union(other: IntSet): IntSet
  }
@@ -16,7 +16,7 @@ class NonEmpty(element: Int, left: IntSet, right: IntSet) extends IntSet {
         if (i > element) right contains i
         else if (i < element) left contains i
         else true
-    
+
     override def include(i: Int): IntSet =
         if (i > element) new NonEmpty(element, left, right include i)
         else if (i < element) new NonEmpty(element, left include i, right)
@@ -24,7 +24,7 @@ class NonEmpty(element: Int, left: IntSet, right: IntSet) extends IntSet {
 
     override def union(other: IntSet): IntSet =
         ((left union right) union other) include element
-    
+
     override def toString = "{ " +
         left.toString() + " " +
         element + " " +
@@ -45,24 +45,5 @@ val t1 = new NonEmpty(3, Empty, Empty)
 val t2 = new NonEmpty(4, Empty, Empty)
 val t3 = new NonEmpty(5, Empty, Empty)
 t1 union t2 union t3 union t0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+t1 union t2
+t2 union t3
