@@ -2,6 +2,8 @@ package objsets
 
 import TweetReader._
 
+import scala.annotation.tailrec
+
 /**
  * A class to represent tweets.
  */
@@ -223,18 +225,28 @@ class Cons(val head: Tweet, val tail: TweetList) extends TweetList {
 object GoogleVsApple {
   val google = List("android", "Android", "galaxy", "Galaxy", "nexus", "Nexus")
   val apple = List("ios", "iOS", "iphone", "iPhone", "ipad", "iPad")
+  lazy val googleTweets: TweetSet = TweetReader.allTweets.filter(t => isContainsTags(t, google))
+  lazy val appleTweets: TweetSet = TweetReader.allTweets.filter(t => isContainsTags(t, apple))
 
-  lazy val googleTweets: TweetSet = ???
-  lazy val appleTweets: TweetSet = ???
+  def isContainsTag(tweet: Tweet, tag: String): Boolean =
+    tweet.text.toLowerCase.indexOf(tag.toLowerCase) >= 0
+
+  def isContainsTags(tweet: Tweet, tags: List[String]): Boolean =
+    if (tags.isEmpty) false
+    else if (isContainsTag(tweet, tags.head)) true
+    else isContainsTags(tweet, tags.tail)
 
   /**
    * A list of all tweets mentioning a keyword from either apple or google,
    * sorted by the number of retweets.
    */
-  lazy val trending: TweetList = ???
+//  lazy val trending: TweetList = googleTweets.union(appleTweets).descendingByRetweet
+  lazy val trending: TweetList = googleTweets union appleTweets descendingByRetweet
 }
 
 object Main extends App {
   // Print the trending tweets
+  // GoogleVsApple.trending foreach println
+  // GoogleVsApple.appleTweets foreach println
   GoogleVsApple.trending foreach println
 }

@@ -12,3 +12,5 @@ nth(0, ints) == 1
 nth(2, ints) == 3
 nth(-1, ints)
 nth(3, ints)
+
+"asdfdf".toLowerCase.indexOf("lll")
