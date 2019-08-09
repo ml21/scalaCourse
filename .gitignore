@@ -5,6 +5,7 @@
 .bloop
 .dotty-ide-artifact
 .dotty-ide.json
+.dotty-ide-disabled
 
 # sbt specific
 .cache/
