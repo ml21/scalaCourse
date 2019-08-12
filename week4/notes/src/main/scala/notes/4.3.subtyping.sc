@@ -45,3 +45,21 @@ val a: Array[NonEmpty] = Array(new NonEmpty(1, Empty, Empty))
 val b: Array[IntSet] = a
 b(0) = Empty
 val s: NonEmpty = a(0)
+
+
+/*
+Т.е. Scala не поддерживает коваринтность массивов.
+А в C# ковариантность массивов поддерживается.
+Например, вот это код скомплируется:
+class Car { }
+class Bmw : Car { }
+class Honda : Car { }
+
+Bmw[] bmws = new Bmw[] { new Bmw(), new Bmw() };
+Car[] cars = bmws;
+
+Honda honda1 = new Honda()
+cars[0] = honda1
+
+и ошибка будет только в рантайми на cars[0] = honda1
+*/
