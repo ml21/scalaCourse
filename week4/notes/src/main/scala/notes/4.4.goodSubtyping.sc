@@ -8,22 +8,26 @@
 A1 => B1 <: A2 => B2
 */
 
-trait List[T] {
+trait List[+T] {
     def isEmpty: Boolean
     def head: T
     def tail: List[T]
+    //def prepend[U >: T](elem: U): List[U] = new Cons(elem, this)
 }
 
-class Cons[T](head: T, tail: List[T]) extends List[T] {
+class Cons[T](val head: T, val tail: List[T]) extends List[T] {
     def isEmpty = false
 
     override def toString = head + " " + tail.toString()
 }
 
-class Nil extends List[T] {
+object Nil extends List[Nothing] {
     def isEmpty = true
     def head = throw new NoSuchElementException("Nil.head")
     def tail = throw new NoSuchElementException("Nil.tail")
+
+    override def toString = "nil"
 }
 
-val l = new Cons[Int](1, new Cons[Int](2, Nil))
+
+val l = new Cons[Int](1, Nil)
