@@ -51,4 +51,17 @@ class HuffmanSuite extends FunSuite {
     }
   }
 
+/////////////////////
+  test("times 0") {
+    assert(times0('a', 'a' :: 'b' :: 'a' :: Nil) == 2)
+  }
+
+  test("distinct") {
+    assert(List('a', 'b', 'a').distinct == List('a', 'b'))
+  }
+
+  test("times") {
+    assert(times('a' :: 'b' :: 'a' :: Nil) == List(('a', 2), ('b', 1)))
+  }
+
 }

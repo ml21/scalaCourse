@@ -53,10 +53,20 @@ fruit.tail.head
 diag3.head
 empty.head
 
-val chars: List[Char] = 'a' :: 'b' :: Nil
+val chars: List[Char] = 'a' :: 'b' :: 'a' :: Nil
 
 chars.head
 chars.tail
+
+def times0(char: Char, list: List[Char]): Int = list match {
+        case x :: Nil => if (x == char) 1 else 0
+        case x :: xs => times0(char, x :: Nil) + times0(char, xs)
+}
+
+times0('a', chars)
+
+
+def times(chars: List[Char]): List[(Char, Int)]
 
 
 
