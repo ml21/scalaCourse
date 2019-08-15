@@ -58,16 +58,22 @@ val chars: List[Char] = 'a' :: 'b' :: 'a' :: Nil
 chars.head
 chars.tail
 
-def times0(char: Char, list: List[Char]): Int = list match {
-        case x :: Nil => if (x == char) 1 else 0
-        case x :: xs => times0(char, x :: Nil) + times0(char, xs)
+// def times0(char: Char, list: List[Char]): Int = list match {
+//         case x :: Nil => if (x == char) 1 else 0
+//         case x :: xs => times0(char, x :: Nil) + times0(char, xs)
+// }
+
+// times0('a', chars)
+
+class Leaf(char: Char, weight: Int) {
+        override def toString = "(" + char + ", " + weight + ")"
 }
 
-times0('a', chars)
+(('a', 9) :: ('b', 1) :: Nil).sortBy(x => x._2)
 
 
-def times(chars: List[Char]): List[(Char, Int)]
-
+ def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] = freqs.sortBy(l => l._2).map(l => new Leaf(l._1, l._2))
+ makeOrderedLeafList(('a', 9) :: ('v', 12) :: Nil)
 
 
 /*
