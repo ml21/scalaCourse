@@ -54,6 +54,20 @@ diag3.head
 empty.head
 
 val chars: List[Char] = 'a' :: 'b' :: 'a' :: Nil
+val chars2: List[Char] = 'a' :: 'b' :: 'a' :: Nil
+chars.toString()
+chars.mkString
+chars.contains('a')
+
+(chars :: chars2).mkString
+
+type CodeTable = List[(Char, List[Int])]
+
+val t: CodeTable = ('a', 1 :: 2 :: Nil) :: Nil
+t.head._1
+
+
+
 
 chars.head
 chars.tail
@@ -74,6 +88,8 @@ class Leaf(char: Char, weight: Int) {
 
  def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] = freqs.sortBy(l => l._2).map(l => new Leaf(l._1, l._2))
  makeOrderedLeafList(('a', 9) :: ('v', 12) :: Nil)
+
+
 
 
 /*
