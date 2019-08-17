@@ -49,8 +49,15 @@ class HuffmanSuite extends FunSuite {
   test("decode and encode a very short text should be identity") {
     new TestTrees {
       val text = 'e' :: 't' :: 't' :: 'x' :: 'x' :: 'x':: 'x' :: Nil
-      val tree = Fork(Fork(Leaf('e',1),Leaf('t',2),List('e', 't'),3), Leaf('x', 4), 'e' :: 't' :: 'x' :: Nil, 7)
-      val a = decode(tree, 0 :: 0 :: Nil)
+//      val tree = Fork(Fork(Leaf('e',1),Leaf('t',2),List('e', 't'),3), Leaf('x', 4), 'e' :: 't' :: 'x' :: Nil, 7)
+//      val con = convert(tree)
+//      val d = quickEncode(tree)('e' :: 'x' :: 't' :: 'e' :: Nil)
+      //      val a = decode(tree, 0 :: 0 :: 1 :: 0 :: 1 :: 0 :: 0 :: Nil).mkString
+//      val e = encodeChar(tree, 'e').mkString
+//      val t = encodeChar(tree, 't').mkString
+//      val x = encodeChar(tree, 'x').mkString
+//      val err = encodeChar(tree, 'q').mkString
+//      val secret = decodedSecret.mkString
       assert(decode(t1, encode(t1)("ab".toList)) === "ab".toList)
     }
   }
