@@ -38,8 +38,8 @@ nums :+ 0
 классы из Java (=> они не являются реализациями Sequence)
 */
 
-val xs = Array(1, 2, 3)
-xs.map(x => 2 * x)
+val a = Array(1, 2, 3)
+a.map(x => 2 * x)
 val ys =  "Hello world!"
 ys.filter(_.isUpper)
 
@@ -69,7 +69,7 @@ r2.reduceLeft(_ + _)
 r1.exists(x => x == 3)
 r1.forall(x => x > 0)
 
-xs zip ys;
+a zip ys;
 val (odds, evens) = List((1, 2), (3, 4), (5, 6)) unzip;
 
 List((1 :: 2 :: Nil), (1 :: 2 :: Nil)).flatMap(x => x);
